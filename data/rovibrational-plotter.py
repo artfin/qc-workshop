@@ -1,4 +1,5 @@
 import matplotlib.pyplot as plt
+import matplotlib.patches as mpatches
 
 def is_number(s):
     try:
@@ -26,9 +27,6 @@ for line in lines:
         if is_number(line.split()[0]):
             transitions_m.append(float(line.split()[0]))
 
-print transitions_p
-print transitions_m
-
 height_p = [1] * len(transitions_p)
 height_m = [1] * len(transitions_m)
 
@@ -36,6 +34,11 @@ width = 3
 
 plt.bar(transitions_p, height_p, width, color = "blue")
 plt.bar(transitions_m, height_m, width, color = "red")
+
+red_patch = mpatches.Patch(color = 'red', label = 'dJ = -1')
+blue_patch = mpatches.Patch(color = 'blue', label = 'dJ = +1')
+
+plt.legend(handles = [red_patch, blue_patch])
 
 #plt.show()
 plt.savefig("rovibrational_transitions.png")
