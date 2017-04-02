@@ -8,7 +8,7 @@ def is_number(s):
     except ValueError:
         return False
 
-with open('rovibrational.dat', mode = 'r') as inputfile:
+with open('rovibrational12.dat', mode = 'r') as inputfile:
     lines = inputfile.readlines()
 
 transitions_p = []
@@ -41,5 +41,5 @@ blue_patch = mpatches.Patch(color = 'blue', label = 'dJ = +1')
 plt.legend(handles = [red_patch, blue_patch])
 
 #plt.show()
-plt.savefig("rovibrational_transitions.png")
+plt.savefig("rovibrational12.png")
 
