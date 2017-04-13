@@ -1,0 +1,49 @@
+basis,vtz
+
+geometry={O;H,O,r}
+
+r=100, angstrom
+
+{hf;wf,9,2,1;orbprint,}
+ehf_inf=energy
+
+{multi;occ,4,1,1,0;frozen,1;wf,9,2,1;}
+emulti_inf=energy
+
+{ci;occ,4,1,1,0;closed,;wf,9,2,1}
+eci_inf=energy
+
+
+
+rmin=0.5, angstrom
+rmax=20, angstrom
+
+n=200
+
+do i=1,n
+ r=rmin+((rmax-rmin)*(i-1))/(n-1)
+ dist(i)=r
+ 
+ {hf;wf,9,2,1;orbprint,}
+ ehf(i)=-(ehf_inf-energy)
+ 
+ {multi;occ,4,1,1,0;frozen,1;wf,9,2,1;}
+ emulti(i)=-(emulti_inf-energy)
+ 
+ {ci;occ,4,1,1,0;closed,;wf,9,2,1; save, 3002.1}
+ eci(i)=-(eci_inf-energy)
+  
+ dipm(i)=dmz
+ 
+ {hf;wf,9,3,1}
+ 
+ {ci;occ,4,1,1,0;closed,;wf,9,3,1; save, 3003.1}
+ 
+ {ci;tranls, 3002.1, 3003.1, 1, 1, lsz}
+ 
+ so(i)=trlsz(1)*tocm
+ 
+enddo
+
+{table,dist,eci*tocm,emulti*tocm,ehf*tocm,dipm,so
+save,OH.tab,new}

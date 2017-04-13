@@ -1,0 +1,8 @@
+0.8         !rmin(ang)
+2.8         !rmax(ang)
+0           !emin(cm-1)
+30000       !emax(cm-1)
+1.0         !mass(a.m.u)
+15          !Jmax
+0           !v1 
+1           !v2
