@@ -1,0 +1,11 @@
+0.5         !rmin(ang)
+10.0        !rmax(ang)
+0           !emin(cm-1)
+33000       !emax(cm-1) 
+0.941176470588
+0.5         !Omega
+20          !Jmax-Omega
+0           !v1 
+1           !v2
+!0.948086909  !mass(a.m.u)   hcl - 0.980075897  dcl - 1.904413244
+
