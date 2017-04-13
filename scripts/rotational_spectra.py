@@ -29,7 +29,6 @@ def model_spectra(temperature):
     
     return transitions, intensities
 
-
 # --------------------------
 # CONSTANTS
 h = 6.626070040*10**(-34) # J * s
@@ -56,7 +55,6 @@ for plot_number, temperature in enumerate(temperatures):
     ax.set_title('T = ' + str(temperature) + 'K')
     ax.bar(transitions, intensities, width, color = 'blue', align = 'center')
 
-#plt.show()
-plt.savefig('rotational_spectra.png')
-
+plt.show()
+#plt.savefig('rotational_spectra.png', bbox_inches = 'tight')
 
