@@ -2,6 +2,7 @@ from __future__ import print_function
 
 import numpy as np
 import matplotlib.pyplot as plt
+import matplotlib.patches as mpatches
 
 def read_energies(filename):
     with open('../potentials/' + filename, mode = 'r') as inputfile:
@@ -19,11 +20,11 @@ def read_energies(filename):
     
     return energies, J
 
-def model_spectra(J, energies, temperature):
+def model_spectra(angular_momentum, transition_energy, temperature):
     transitions = []
     intensities = []
 
-    for j, e1, e2 in zip(J, energies, energies[1:]):
+    for j, e1, e2 in zip(angular_momentum, transition_energy, transition_energy[1:]):
         transitions.append(e2 - e1)
         intensities.append(d0**2 * (j + 1) * np.exp(- h * c * rotational_constant * j * (j + 1) / (k * temperature)))
     
@@ -46,26 +47,22 @@ print('rotational_constant: {0} cm-1'.format(rotational_constant))
 energies, J = read_energies('example_potential/energy.dat')
 energies_ex, J_ex = read_energies('my_potential/energy.dat')
 
-width = 1.5
+width = 1.57
 
-temperatures = [30]
+temperatures = [30, 50, 70, 100]
 for plot_number, temperature in enumerate(temperatures):
     transitions, intensities = model_spectra(J, energies, temperature)
     transitions_ex, intensities_ex = model_spectra(J_ex, energies_ex, temperature)
-    print('transitions: {0}'.format(transitions))
-    print('transitions_ex: {0}'.format(transitions_ex))
-   
-    print('len transitions: {0}'.format(len(transitions)))
-    print('len transitions_ex: {0}'.format(len(transitions_ex)))
-
-    delta = [t1 - t2 for t1, t2 in zip(transitions, transitions_ex)]
-    print('delta: {0}'.format(delta))
 
     ax = plt.subplot(2, 2, plot_number + 1)
     ax.set_title('T = ' + str(temperature) + 'K')
-    #ax.bar(transitions, intensities, width, color = 'blue', align = 'center')
-    ax.bar(transitions_ex, intensities_ex, color = 'red', align = 'center')
+    ax.bar(transitions, intensities, width, color = 'blue')
+    ax.bar(transitions_ex, intensities_ex, width, color = 'red')
+
+    red_patch = mpatches.Patch(color = 'red', label = 'Empirical')
+    blue_patch = mpatches.Patch(color = 'blue', label = 'Calculated')
+    plt.legend(handles = [red_patch, blue_patch])
 
 plt.show()
-#plt.savefig('rotational_spectra.png', bbox_inches = 'tight')
+#plt.savefig('rotational_spectra.png')
 
