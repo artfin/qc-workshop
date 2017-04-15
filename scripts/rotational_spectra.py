@@ -4,7 +4,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 def read_energies(filename):
-    with open('../data/' + filename, mode = 'r') as inputfile:
+    with open('../potentials/' + filename, mode = 'r') as inputfile:
         lines = inputfile.readlines()
 
     J = []
@@ -43,8 +43,8 @@ mu = 16. * 1. / (16. + 1.) * da # in kg
 rotational_constant = h / (8 * np.pi**2 * mu * c * r**2) / 100 # 100 to translate m**(-1) to cm**(-1)
 print('rotational_constant: {0} cm-1'.format(rotational_constant))
 
-energies, J = read_energies('my_energy.dat')
-energies_ex, J_ex = read_energies('example_energy.dat')
+energies, J = read_energies('example_potential/energy.dat')
+energies_ex, J_ex = read_energies('my_potential/energy.dat')
 
 width = 1.5
 
