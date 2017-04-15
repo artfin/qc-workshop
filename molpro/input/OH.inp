@@ -1,0 +1,49 @@
+*** OH radical
+
+basis = vdz ! basis set
+
+geometry = {o; h, o, r}
+! r = 1.83
+r_min = 0.5, angstrem
+r_max = 10.0, angstrem
+n = 200
+
+geometry = {o; h, o, r}
+r = 100.
+
+hf
+e_hf_inf = energy
+
+{multi; occ, 4, 1, 1; frozen, 1,; wf, 9, 2, 1}
+e_multi_inf = energy
+
+{ci;occ, 4, 1, 1; closed, ;wf, 9, 2, 1}
+e_ci_inf = energy
+
+do i=1, n
+r = r_min + (r_max - r_min)/(n-1) * (i-1)
+dist(i) = r
+
+! hartree fock
+hf
+e_hf_r(i) = energy
+
+! multiconfigurational self-consisted field
+{multi; occ, 4,1,1; frozen, 1,; wf,9,2,1;}
+e_multi_r(i) = energy
+
+! configuration interaction 
+{ci;occ,4,1,1;closed,;wf,9,2,1}
+e_ci_r(i) = energy
+
+dip(i) = dmz
+
+de_hf(i) = (e_hf_r(i) - e_hf_inf) * TOCM ! hf de
+de_multi(i) = (e_multi_r(i) - e_multi_inf) * TOCM ! multi de
+de_ci(i) = (e_ci_r(i) - e_ci_inf) * TOCM ! energy in cm^-1
+
+enddo
+
+table,dist, de_hf, de_multi, de_ci, dip
+save
+---

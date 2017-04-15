@@ -1,0 +1,34 @@
+basis = vdz ! basis set
+
+geometry = {o; h, o, r}
+
+r = 1.83
+
+uks, pbe
+optg
+
+e_pbe = energy
+r_pbe = r
+
+uks, pbe0
+optg
+
+e_pbe0 = energy
+r_pbe0 = r
+
+r = 100
+
+uks, pbe
+e_inf_pbe = energy
+
+uks, pbe0, shifta=-0.5
+e_inf_pbe0 = energy
+
+de_pbe = (e_inf_pbe - e_pbe) * TOCM ! hartree to cm^1
+de_pbe0 = (e_inf_pbe0 - e_pbe0) * TOCM
+
+table, r_pbe, r_pbe0, de_pbe, de_pbe0, e_pbe, e_pbe0, e_inf_pbe, e_inf_pbe0
+---
+
+
+
