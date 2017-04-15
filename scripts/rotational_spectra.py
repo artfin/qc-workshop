@@ -3,8 +3,8 @@ from __future__ import print_function
 import numpy as np
 import matplotlib.pyplot as plt
 
-def read_energies():
-    with open('../data/energy.dat', mode = 'r') as inputfile:
+def read_energies(filename):
+    with open('../data/' + filename, mode = 'r') as inputfile:
         lines = inputfile.readlines()
 
     J = []
@@ -19,7 +19,7 @@ def read_energies():
     
     return energies, J
 
-def model_spectra(temperature):
+def model_spectra(J, energies, temperature):
     transitions = []
     intensities = []
 
@@ -43,17 +43,28 @@ mu = 16. * 1. / (16. + 1.) * da # in kg
 rotational_constant = h / (8 * np.pi**2 * mu * c * r**2) / 100 # 100 to translate m**(-1) to cm**(-1)
 print('rotational_constant: {0} cm-1'.format(rotational_constant))
 
-energies, J = read_energies()
+energies, J = read_energies('my_energy.dat')
+energies_ex, J_ex = read_energies('example_energy.dat')
 
 width = 1.5
 
-temperatures = [30, 50, 70, 100]
+temperatures = [30]
 for plot_number, temperature in enumerate(temperatures):
-    transitions, intensities = model_spectra(temperature)
+    transitions, intensities = model_spectra(J, energies, temperature)
+    transitions_ex, intensities_ex = model_spectra(J_ex, energies_ex, temperature)
+    print('transitions: {0}'.format(transitions))
+    print('transitions_ex: {0}'.format(transitions_ex))
+   
+    print('len transitions: {0}'.format(len(transitions)))
+    print('len transitions_ex: {0}'.format(len(transitions_ex)))
+
+    delta = [t1 - t2 for t1, t2 in zip(transitions, transitions_ex)]
+    print('delta: {0}'.format(delta))
 
     ax = plt.subplot(2, 2, plot_number + 1)
     ax.set_title('T = ' + str(temperature) + 'K')
-    ax.bar(transitions, intensities, width, color = 'blue', align = 'center')
+    #ax.bar(transitions, intensities, width, color = 'blue', align = 'center')
+    ax.bar(transitions_ex, intensities_ex, color = 'red', align = 'center')
 
 plt.show()
 #plt.savefig('rotational_spectra.png', bbox_inches = 'tight')
