@@ -58,9 +58,15 @@ for plot_number, temperature in enumerate(temperatures):
     print('intensities: {0}'.format(intensities))
     print('*'*30)
     ax = plt.subplot(2, 2, plot_number + 1)
-    ax.set_xlim(0, 15000)
+    ax.grid()
+    ax.set_xlim(2000, 12000)
+    ax.set_ylim(0, 0.00045)
     ax.set_title('T = ' + str(temperature) + 'K')
     ax.bar(frequencies, intensities, width, color = 'blue')
     ax.bar(frequencies_ex, intensities_ex, width, color = 'red')
+    
+    red_patch = mpatches.Patch(color = 'red', label = 'Empirical')
+    blue_patch = mpatches.Patch(color = 'blue', label = 'Calculated')
+    plt.legend(handles = [red_patch, blue_patch])
 
 plt.show()
