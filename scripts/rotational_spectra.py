@@ -4,8 +4,11 @@ import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.patches as mpatches
 
+# constants
+cmtoj = 1.98630 * 10**(-23)
+
 def read_energies(filename):
-    with open('../potentials/' + filename, mode = 'r') as inputfile:
+    with open('../data/' + filename, mode = 'r') as inputfile:
         lines = inputfile.readlines()
 
     J = []
@@ -26,8 +29,10 @@ def model_spectra(angular_momentum, transition_energy, temperature):
 
     for j, e1, e2 in zip(angular_momentum, transition_energy, transition_energy[1:]):
         transitions.append(e2 - e1)
-        intensities.append(d0**2 * (j + 1) * np.exp(- h * c * rotational_constant * j * (j + 1) / (k * temperature)))
-    
+        #intensities.append(d0**2 * (j + 1) * np.exp(- h * c * rotational_constant * j * (j + 1) / (k * temperature)))
+        #print('e2-e1: {0}'.format(e2-e1))
+        intensities.append(d0**2 * (j + 1 - 0.5) * np.exp(- (e2 - e1) * cmtoj / (k * temperature))) 
+    print('-'*30)
     return transitions, intensities
 
 # --------------------------
@@ -49,7 +54,7 @@ energies_ex, J_ex = read_energies('my_potential/energy.dat')
 
 width = 1.57
 
-temperatures = [30, 50, 70, 100]
+temperatures = [150, 200, 250, 300]
 for plot_number, temperature in enumerate(temperatures):
     transitions, intensities = model_spectra(J, energies, temperature)
     transitions_ex, intensities_ex = model_spectra(J_ex, energies_ex, temperature)
