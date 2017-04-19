@@ -1,4 +1,5 @@
-with open('energy.dat', mode = 'r') as inputfile:
+filename = '/home/artfin/Desktop/repos/qc-workshop/data/my_potential/energy.dat'
+with open(filename, mode = 'r') as inputfile:
     lines = inputfile.readlines()
 
 v0 = []
@@ -6,9 +7,9 @@ v1 = []
 
 for line in lines:
     if line.split()[0].isdigit():
-        if int(line.split()[0]) == 1:
+        if int(line.split()[0]) == 0:
             v0.append(float(line.split()[1]))
-        if int(line.split()[0]) == 2:
+        if int(line.split()[0]) == 1:
             v1.append(float(line.split()[1]))
 
 # transitions corresponding to j = +1

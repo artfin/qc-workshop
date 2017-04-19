@@ -29,10 +29,7 @@ def model_spectra(angular_momentum, transition_energy, temperature):
 
     for j, e1, e2 in zip(angular_momentum, transition_energy, transition_energy[1:]):
         transitions.append(e2 - e1)
-        #intensities.append(d0**2 * (j + 1) * np.exp(- h * c * rotational_constant * j * (j + 1) / (k * temperature)))
-        #print('e2-e1: {0}'.format(e2-e1))
-        intensities.append(d0**2 * (j + 1 - 0.5) * np.exp(- (e2 - e1) * cmtoj / (k * temperature))) 
-    print('-'*30)
+        intensities.append(d0**2 * (j + 1) * np.exp(-e1 * cmtoj / (k * temperature))) 
     return transitions, intensities
 
 # --------------------------
@@ -52,9 +49,9 @@ print('rotational_constant: {0} cm-1'.format(rotational_constant))
 energies, J = read_energies('example_potential/energy.dat')
 energies_ex, J_ex = read_energies('my_potential/energy.dat')
 
-width = 1.57
+width = 2.0
 
-temperatures = [150, 200, 250, 300]
+temperatures = [200, 250, 300, 350]
 for plot_number, temperature in enumerate(temperatures):
     transitions, intensities = model_spectra(J, energies, temperature)
     transitions_ex, intensities_ex = model_spectra(J_ex, energies_ex, temperature)
