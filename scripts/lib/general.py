@@ -27,7 +27,7 @@ def read_spectrum_file(filename):
 
     return frequency, matrix_element
 
-def read_energy_file(filename):
+def read_energy_file(filename, vibrational_level):
     #print('Given path to read from: {0}'.format('data/' + filename))
     
     with open('data/' + filename, mode = 'r') as inputfile:
@@ -40,7 +40,7 @@ def read_energy_file(filename):
         if 'J' in line:
             J.append(float(line.split()[-1]))
         if line.split()[0].isdigit():
-            if int(line.split()[0]) == 0:
+            if int(line.split()[0]) == vibrational_level:
                 energies.append(float(line.split()[1]))
     
     return energies, J

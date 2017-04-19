@@ -5,7 +5,10 @@ db_begin('data')
 
 x, y = getStickXY('OH')
 plot(x, y)
-xlim([3200, 3850])
-ylim([0, 10e-20])
+xlim([50, 400])
+
+# for rovibrational band of OH
+#ylim([0, 10e-20])
+
 grid()
 show()
