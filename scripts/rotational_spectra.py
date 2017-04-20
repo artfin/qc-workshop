@@ -15,7 +15,12 @@ def model_spectra(angular_momentum, transition_energy, temperature):
     
     for j, e1, e2 in zip(angular_momentum, transition_energy, transition_energy[1:]):
         transitions.append(e2 - e1)
-        intensities.append(d0**2 * (j + 1) * np.exp(-e1 * cmtoj / (k * temperature))) 
+        intensities.append(d0**2 * (j + 1) * np.exp(-e1 * cmtoj / (k * temperature)))
+        print('J transition: {0} -> {1}'.format(j, j+1))
+        print('Transition: {0}'.format(e2 - e1))
+        print('Going from energy level: {0}'.format(e1))
+        print('Intensity: {0}'.format(intensities[-1]))
+        print('*'*30)
     return transitions, intensities
 
 # --------------------------
@@ -32,14 +37,16 @@ mu = 16. * 1. / (16. + 1.) * da # in kg
 rotational_constant = h / (8 * np.pi**2 * mu * c * r**2) / 100 # 100 to translate m**(-1) to cm**(-1)
 print('rotational_constant: {0} cm-1'.format(rotational_constant))
 
-energies, J = read_energy_file('example_potential/energy.dat', vibrational_level = 0)
-energies_ex, J_ex = read_energy_file('my_potential/energy.dat', vibrational_level = 0)
+energies, J = read_energy_file('my_potential/energy.dat', vibrational_level = 0)
+energies_ex, J_ex = read_energy_file('example_potential/energy.dat', vibrational_level = 0)
 
-width = 1.75
+width = 2
 
 temperatures = [200, 250, 300, 350]
 for plot_number, temperature in enumerate(temperatures):
+    print('MODELING SPECTRA BASED ON CALCULATED POTENTIAL')
     transitions, intensities = model_spectra(J, energies, temperature)
+    print('MODELING SPECTRA BASED ON EMPIRICAL POTENTIAL')
     transitions_ex, intensities_ex = model_spectra(J_ex, energies_ex, temperature)
     
     show_spectra(temperature, transitions, intensities)
