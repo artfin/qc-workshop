@@ -28,10 +28,10 @@ def model_spectra(angular_momentum, base_energies, matrix_element, temperature):
         intensities.append(d0**2 * matrix_element**2 * (j + 1) * np.exp(-e1 * cmtoj / (k * temperature)))
     return intensities
 
-v0, J = read_energy_file('my_potential/energy.dat', vibrational_level = 0)
-v1, J = read_energy_file('my_potential/energy.dat', vibrational_level = 1)
-v0_ex, J = read_energy_file('example_potential/energy.dat', vibrational_level = 0)
-v1_ex, J = read_energy_file('example_potential/energy.dat', vibrational_level = 1)
+v0, J = read_energy_file('my_potential/energy.dat', vibrational_level = 2)
+v1, J = read_energy_file('my_potential/energy.dat', vibrational_level = 3)
+v0_ex, J = read_energy_file('example_potential/energy.dat', vibrational_level = 2)
+v1_ex, J = read_energy_file('example_potential/energy.dat', vibrational_level = 3)
 
 frequencies, matrix_elements = read_spectrum_file('vib-sp-my/spectrum.dat')
 frequencies_ex, matrix_elements_ex = read_spectrum_file('vib-sp-example/spectrum.dat')
