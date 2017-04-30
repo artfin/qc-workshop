@@ -6,7 +6,8 @@ db_begin('data')
 # to get additional info on function 'fetch'
 # getHelp(fetch)
 
-fetch('OH', 13, 1, 0, 12000)
+fetch('HCl', 15, 1, 0, 12000)
+#fetch('OH', 13, 1, 0, 12000)
 # TableName 
 # M -- HITRAN  molecule number
 # I -- HITRAN isotopologue number

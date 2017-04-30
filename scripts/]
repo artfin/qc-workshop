@@ -87,7 +87,7 @@ with open('../tex/einstein_table/main.tex', mode = 'w') as out:
             out.write(line)
 
     for j_from, j_to, freq1, freq2, e1, e2 in zip(lower_j, higher_j, frequencies, freqs_hitran, einstein_coefficients, ecoeffs_hitran):
-        out.write('{0:.3f}'.format(freq1) + ' & ' + '{0:.3f}'.format(freq2) + ' & ' + str(j_from) + ' & ' + str(j_to) + ' & ' + '{0:.3f}'.format(e1) + ' & ' + '{0:.3f}'.format(e2) + ' \\\\ \n')
+        out.write({0:.3f} + ' & ' + {1:.3f} + ' & ' + str(j_from) + ' & ' + str(j_to) + ' & ' + str(e1) + ' & ' + str(e2) + ' \\\\ \n'.format(freq1, freq2))
     
     out.write('\hline \n')
 
