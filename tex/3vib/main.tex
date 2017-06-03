@@ -1,0 +1,155 @@
+\documentclass[12pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[russian]{babel}
+
+% page margin
+\usepackage[top=2cm,bottom=2cm, left=2cm, right=2cm]{geometry}
+
+% AMS packages
+\usepackage{amssymb}
+\usepackage{amsmath}
+
+% fancy layout
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+
+% table/tabular packages
+\usepackage{tabularx, rotating, ragged2e, booktabs, caption}
+\usepackage{graphicx}
+\usepackage[verbose]{placeins}
+\usepackage{blindtext}
+\usepackage{multicol}
+
+\newcolumntype{C}[1]{>{\Centering}m{#1}}
+\renewcommand\tabularxcolumn[1]{C{#1}}
+\setlength{\tabcolsep}{12pt}
+
+\begin{document}
+
+\captionof{table}{Mol. \& vib. params. $H_2 O$}
+\begin{tabular}{ccccc}
+\toprule
+& \multicolumn{2}{c}{Values} & \multicolumn{2}{c}{Freqs} \\
+\cmidrule(r){2-3} \cmidrule(r){4-5}  
+& Calc. & Exp. & Calc. & Exp. \\
+\cmidrule(r){2-3} \cmidrule(r){4-5}
+r(O-H) & 0.965 & $0.958$ & $3931$ & 3657 (asym.) \\
+$\angle$ HOH & $105.754$ & $104.478$ & $3809$ & 3756 (sym.) \\
+$\mu$ (D) & 2.195 & $1.855$ & $1603$ & $1595$ \\
+	       & B3LYP; 6-31+G** & NIST & B3LYP; 6-31+G** & NIST \\
+\bottomrule
+\end{tabular}
+
+\captionof{table}{Mol. \& vib. params. $D_2 O$}
+\begin{tabular}{ccccc}
+\toprule
+& \multicolumn{2}{c}{Values} & \multicolumn{2}{c}{Freqs} \\
+\cmidrule(r){2-3} \cmidrule(r){4-5}  
+& Calc. & Exp. & Calc. & Exp. \\
+\cmidrule(r){2-3} \cmidrule(r){4-5}
+r(O-D) & 0.965 & $0.956$ & 2882 & 2671 (asym.) \\
+$\angle$ DOD & 105.754 & $105.200 $ & 2745 & 2788 (sym.) \\
+$\mu$ (D) & 2.195  & $1.855$ & 1174 & 1178 \\
+	       & B3LYP; 6-31+G** & NIST & B3LYP; 6-31+G** & NIST \\
+\bottomrule
+\end{tabular}
+
+
+\begin{minipage}{0.5\linewidth}
+	\captionof{table}{$H_2O$ F-matrix}
+\begin{tabular}{cccc}
+\toprule
+q(OH)$_1$ & 8.3806 & &  \\
+q(OH)$_2$ & -0.1159 & 8.3806 & \\
+(HOH) & 0.243 & 0.243 & 0.6724 \\
+      & q(OH)$_1$ & q(OH)$_2$ & (HOH) \\
+\bottomrule
+\end{tabular}
+\end{minipage}
+\begin{minipage}{0.5\linewidth}
+\captionof{table}{$H_2O$ G-matrix}
+\begin{tabular}{cccc}
+\toprule
+q(OH)$_1$ & 1.7902 & &  \\
+q(OH)$_2$ & -0.0288 & 1.7902 & \\
+(HOH) & -0.1058 & -0.1058 & 3.906 \\
+      & q(OH)$_1$ & q(OH)$_2$ & (HOH) \\
+\bottomrule
+\end{tabular}
+\end{minipage}
+
+\begin{minipage}{0.5\linewidth}
+\captionof{table}{$D_2O$ F-matrix}
+\begin{tabular}{cccc}
+\toprule
+q(OH)$_1$ & 8.3805 & &  \\
+q(OH)$_2$ & -0.1159 & 8.3805 & \\
+(HOH) & 0.243 & 0.243 & 0.6724 \\
+      & q(OH)$_1$ & q(OH)$_2$ & (HOH) \\
+\bottomrule
+\end{tabular}
+\end{minipage}
+\begin{minipage}{0.5\linewidth}
+\captionof{table}{$D_2O$ G-matrix}
+\begin{tabular}{cccc}
+\toprule
+q(OH)$_1$ & 0.9488 & &  \\
+q(OH)$_2$ & -0.0288 & 0.9488 & \\
+(HOH) & -0.1058 & -0.1058 & 2.0992 \\
+      & q(OH)$_1$ & q(OH)$_2$ & (HOH) \\
+\bottomrule
+\end{tabular}
+\end{minipage}
+
+\newpage
+
+\begin{sidewaystable}[htb]
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{c c c c c}
+	\hline \\[-6pt]
+\multicolumn{5}{c}{Apostolo} \\[4pt]
+\hline \\[-6pt]
+Exp. $\nu$, cm$^{-1}$ & Calc. $\nu$, cm$^{-1}$ & Desc. & Symm.  & Assign. \\[2pt] 
+\hline \\[-6pt]
+3534.8/3530.6sh/3529.4/3526.6sh/3525.9/3522.6/3521.0 & 3525.7 & $\nu$(OH) & A$^\prime$ & S1(100) \\
+1796.5/1795.9sh/1794.6sh/1793.7 & 1802.6 & $\nu$(CO) & A$^\prime$ & S2(89) \\
+1350.1/1344.8 & 1345.0 & $\delta$(COH), $\nu$(CO) & A$^\prime$ & S8(44)+S3(28)+S9(16) \\ 
+1162.0/1160.4sh/1158.6/1155.9sh/1151.2/1149.8sh/1147.5 & 1170.0 & $\nu$(CO), $\delta$(COH) & A$^\prime$ & S8(43)+S3(41) \\
+941.6/940.8/939.2/937.3 & 943.6 & $\nu$(CC) & A$^\prime$ & S4(48)+S3(17)+S13(17)+S7(13) \\
+868-832(d); max.: 865.1/855.9 & 834.9 & $\nu$(CO) & A$^{\prime\prime}$ & S14(53)+S16(20)+S6(15) \\
+868-832(d); max.: 845.9/833.7 & 834.1 & $\nu$(CCl$_3$), as & A$^\prime$ & S5(53)+S10(16)+S15(15)+S11(11) \\
+700.5/699.1sh/696.5/695.7sh/694.9/692.8sh & 706.4  &$\nu$(CCl$_3$), as & A$^{\prime\prime}$ & S6(53)+S17(32)+S14(11) \\
+658.2/657.3 & 674.5 & $\delta$(OCO) & A$^\prime$ & S9(61)+S7(10) \\
+\hline
+\end{tabular}}
+
+\vspace{1cm}
+
+\begin{center}
+\begin{tabular}{c c c}
+\hline \\[-6pt]
+\multicolumn{3}{c}{Calc.; B3LYP, 6-31+G**} \\[4pt]
+\hline \\[-6pt]
+Calc. $\nu$, cm$^{-1}$ & Symm. & Assign. \\[2pt]
+\hline \\[-6pt]
+3762.6 & A$^\prime$ & 100 q(OH)$_1$ \\
+1845.3 & A$^\prime$ & 89 q(CO)$_1$  \\
+1357.3 & A$^\prime$ & 42 a1+29 q(CO)$_2$ + 11 a2 +10 q(CC)$_1$ \\
+1172.1 & A$^\prime$ & 44 a1+40 q(CO)$_2$ + 6 q(CO)$_1$ + 5 q(CC)$_1$ \\
+935.3 & A$^\prime$ & 48 q(CC)$_1$ + 17 q(CO)$_2$ + 9 q(CC)$_1$ \\
+819.8 & A$^{\prime\prime}$ & 56 x + 20 a6 + 16 q(C-Cl)$_2$ + 6 a8 \\
+823.5 & A$^\prime$ & 32 q(C-Cl)$_1$ + 21 q(C-Cl)$_2$ + 13 a5 + 10 a10 \\
+681.8 & A$^{\prime\prime}$ & 53 q(C-Cl)$_2$ + 23 t2 + 18 x + 7 a8  \\
+649.5 & A$^\prime$ & 44 a2 + 15 a3 + 8 a1 + 8 a4 \\
+545.5 & A$^{\prime\prime}$ & 75 t2 + 15 q(C-Cl)$_2$ + 9 x \\
+428.2 & A$^\prime$ & 60 q(C-Cl)$_2$ + 14 q(C-Cl)$_1$ + 13 q(CC)$_1$ + 5 a3 \\
+\hline
+\end{tabular}
+\end{center}
+\end{sidewaystable}
+
+
+\end{document}
+

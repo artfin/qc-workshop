@@ -36,7 +36,9 @@ def model_spectra(energies, matrix_elements, temperature):
     
     intensities = []
     for e, m in zip(energies, matrix_elements):
-        intensities.append(m**2 * np.exp(-e * cmtoj / (k * temperature)) )
+        intensities.append( m**2 )
+    
+    print(intensities)
     return intensities
 
 def norm_arr(s):
@@ -66,11 +68,24 @@ def get_hitran_data():
             #print('looking for transitions {0} -> {1}'.format(ll, hl))
                 
             if 'v=' + str(ll) in data[3] and 'v=' + str(hl) in data[4]:
+                
+                lparity = data[3].split('parity=')[1].split(';')[0]
+                hparity = data[4].split('parity=')[1].split(';')[0]
+
+                #print('lparity: {0}; hparity: {1}'.format(lparity, hparity))
+                #print('lparity == hparity: {0}'.format(lparity == hparity))
+
+                #lkronig = data[3].split('kronigParity=')[1].split(';')[0]
+                #hkronig = data[4].split('kronigParity=')[1].split(';')[1]
     
                 lj = float(data[3].split('J=')[1].split(';')[0])
                 hj = float(data[4].split('J=')[1].split(';')[0])
 
-                if lj == hj:
+                lomega = float(data[3].split('Omega=')[1].split(';')[0])
+                homega = float(data[4].split('Omega=')[1].split(';')[0])
+        
+                if lj == hj and lomega == homega and lparity == hparity:
+                    print(line) 
                     freq_hitran.append(float(data[1]))
                     lineint_hitran.append(float(data[5]))
 
