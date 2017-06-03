@@ -1,0 +1,75 @@
+
+ Primary working directories    : /mnt/SSD/student17
+ Secondary working directories  : /mnt/SSD/student17
+ Wavefunction directory         : /home/student17/wfu/
+ Main file repository           : /mnt/SSD/student17/
+
+ ARCHNAME  : Linux/x86_64
+ FC        : /usr/bin/gfortran
+ FCVERSION : 4.7.2
+ BLASLIB   : -L/opt/intel/mkl/lib/intel64 -lmkl_intel_ilp64 -lmkl_sequential -lmkl_core
+ id        : plat
+
+ Nodes     nprocs
+ debserv      1
+ ga_uses_ma=false, calling ma_init with nominal heap.
+ GA-space will be limited to   8.0 MW (determined by -G option)
+
+ Using customized tuning parameters: mindgm=12; mindgv=24; mindgc=8; mindgr=1; noblas=0; mincuda=1000; minvec=7
+ default implementation of scratch files=df  
+
+ geometry={nosym; he1; he2, he1, r}
+ basis = avtz
+ 
+                                                                                 ! wf records
+ ca = 2101.2
+ cb = 2101.2
+ 
+                                                                                 ! distances
+ dist = [4.5, 5.0, 5.5, 5.6, 6.0, 6.5, 7.0]
+ 
+ do i=1,#dist
+ 
+ r = dist(i)
+ 
+                                                                                 ! monomer A
+ dummy, he2
+ {hf, save, $ca}
+ sapt;monomerA
+ 
+                                                                                 ! monomer B
+ dummy, he1
+ {hf; start, atdens; save, $cb}
+ sapt; monomerB
+ 
+                                                                                 ! interaction contributions
+ sapt; intermol, ca=$ca, cb=$cb
+ 
+ elst(i) = E1pol; exch(i) = E1ex
+ ind(i) = E2ind; exind(i) = E2exind
+ disp(i) = E2disp; exdisp(i) = E2exdisp
+ etot(i) = E12tot
+ 
+ data, truncate, $ca
+ enddo
+ 
+ {table, dist, elst, exch, ind, exind, disp, exdisp, etot
+ ftyp, d,d,d,d,d,d,d,d,d
+ plot}
+ 
+ 
+
+ Variables initialized (661), CPU time= 0.00 sec
+ Commands  initialized (460), CPU time= 0.00 sec, 486 directives.
+ Default parameters read. Elapsed time= 0.01 sec
+
+ Checking input...
+
+ Error on HF-SCF directive
+
+ Parameter SAVE for set HFOPT is of type FLOAT. A value must be given.
+ ? Error
+ ? Input error
+ ? The problem occurs in scan_inp
+
+ GLOBAL ERROR fehler on processor   0                                         

@@ -1,0 +1,17 @@
+***,N2F2 CIS GEOMETRY (C2h)
+rnn=1.223,ang                         !define N-N distance
+rnf=1.398,ang                         !define N-F distance
+alpha=114.5;                          !define FNN angle
+geometry={N1
+          N2,N1,rnn
+          F1,N1,rnf,N2,alpha
+          F2,N2,rnf,N1,alpha,F1,180}
+basis=vtz                             !cc-pVTZ basis set
+$method=[hf, ccsd(t)]  !all methods to use
+do i=1,#method                        !loop over requested methods
+$method(i)                            !perform calculation for given methods
+e(i)=energy                           !save energy in variable e
+enddo                                 !end loop over methods
+table,method,e                        !print a table with results
+title,Results for n2f2, basis=$basis  !title of table
+

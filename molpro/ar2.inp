@@ -1,0 +1,31 @@
+*** Ar-Ar
+
+! basis = aug-cc-pvqz ! basis set
+basis = aug-cc-pvqz
+
+geometry = {ar; ar, ar, r}
+r_min = 3.30, angstrem
+r_max = 7.50, angstrem
+n = 43
+
+do i=1, n
+r = r_min + (r_max - r_min)/(n-1) * (i-1)
+dist(i) = r
+
+! hartree fock
+hf
+ccsd(t)
+e_complex = energy 
+
+text, energy of Ar1
+dummy ar
+hf
+ccsd(t)
+e_ar = energy
+
+e(i) = e_complex - 2 * e_ar
+
+enddo
+
+table dist, e
+save ar2.tab, new

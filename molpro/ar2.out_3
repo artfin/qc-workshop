@@ -1,0 +1,205 @@
+
+ Primary working directories    : /mnt/SSD/student17
+ Secondary working directories  : /mnt/SSD/student17
+ Wavefunction directory         : /home/student17/wfu/
+ Main file repository           : /mnt/SSD/student17/
+
+ ARCHNAME  : Linux/x86_64
+ FC        : /usr/bin/gfortran
+ FCVERSION : 4.7.2
+ BLASLIB   : -L/opt/intel/mkl/lib/intel64 -lmkl_intel_ilp64 -lmkl_sequential -lmkl_core
+ id        : plat
+
+ Nodes     nprocs
+ debserv      1
+ ga_uses_ma=false, calling ma_init with nominal heap.
+ GA-space will be limited to   8.0 MW (determined by -G option)
+
+ Using customized tuning parameters: mindgm=12; mindgv=24; mindgc=8; mindgr=1; noblas=0; mincuda=1000; minvec=7
+ default implementation of scratch files=df  
+
+ ***,Ar-Ar
+ 
+ basis = aug-cc-pv5z                                                             ! basis set
+ 
+ geometry = {ar; ar, ar, r}
+ r_min = 3.30, angstrem
+ r_max = 7.50, angstrem
+ n = 43
+ 
+ do i=1, n
+ r = r_min + (r_max - r_min)/(n-1) * (i-1)
+ dist(i) = r
+ 
+                                                                                 ! hartree fock
+ hf
+ ccsd(t)
+ e_vdw = energy
+ 
+                                                                                 ! atomic energies?
+                                                                                 ! dummy ar
+                                                                                 ! hf
+                                                                                 ! ccsd(t)
+                                                                                 ! e_atomic = energy
+ 
+ e(i) = e_vdw
+ enddo
+ 
+ table dist, e
+ save ar2.tab, new
+
+ Variables initialized (661), CPU time= 0.00 sec
+ Commands  initialized (460), CPU time= 0.01 sec, 486 directives.
+ Default parameters read. Elapsed time= 0.01 sec
+
+ Checking input...
+ Passed
+1
+
+
+                                         ***  PROGRAM SYSTEM MOLPRO  ***
+                         Copyright, University College Cardiff Consultants Limited, 2008
+
+                                    Version 2010.1 linked 30 –ù–æ—è 2013 12:52
+
+
+ **********************************************************************************************************************************
+ LABEL *   Ar-Ar                                                                         
+ Linux-3.2.0-4-amd64/debserv(x86_64) 64 bit mpp version                                  DATE: 02-Jun-17          TIME: 23:45:23  
+ **********************************************************************************************************************************
+
+ SHA1:             fd122acbd35ef3619fab5330ac0556b6c1fa4be2
+ **********************************************************************************************************************************
+
+ Variable memory set to    8000000 words,  buffer space   230000 words
+
+ SETTING BASIS          =    AUG-CC-PV5Z
+ SETTING R_MIN          =         3.30000000  ANGSTREM                        
+ SETTING R_MAX          =         7.50000000  ANGSTREM                        
+ SETTING N              =        43.00000000                                  
+
+ DO I                   =         1.00000000   
+ SETTING R              =         3.30000000  ANGSTREM                        
+ SETTING DIST(1)        =         3.30000000  ANGSTREM                        
+
+
+ Recomputing integrals since basis changed
+
+
+ Using spherical harmonics
+
+ Library entry AR     S aug-cc-pV5Z          selected for orbital group  1
+ Library entry AR     P aug-cc-pV5Z          selected for orbital group  1
+ Library entry AR     D aug-cc-pV5Z          selected for orbital group  1
+ Library entry AR     F aug-cc-pV5Z          selected for orbital group  1
+ Library entry AR     G aug-cc-pV5Z          selected for orbital group  1
+ Library entry AR     H aug-cc-pV5Z          selected for orbital group  1
+
+1PROGRAM * SEWARD (Integral evaluation for generally contracted gaussian basis sets)     Author: Roland Lindh, 1990
+
+ Geometry written to block  1 of record 700
+
+ Orientation using atomic masses  
+ Molecule type: Linear
+ Symmetry elements: X,Y,Z
+ Rotational constants:       2.3234015      2.3234015      0.0000000 GHz  (calculated with average atomic masses)
+
+ Point group  D2h 
+
+
+
+ ATOMIC COORDINATES
+
+ NR  ATOM    CHARGE       X              Y              Z
+
+   1  AR     18.00    0.000000000    0.000000000   -3.118048117
+   2  AR     18.00    0.000000000    0.000000000    3.118048117
+
+ NUCLEAR CHARGE:                   36
+ NUMBER OF PRIMITIVE AOS:         434
+ NUMBER OF SYMMETRY AOS:          324
+ NUMBER OF CONTRACTIONS:          262   (  48Ag  +  32B3u +  32B2u +  19B1g +  48B1u +  32B2g +  32B3g +  19Au  )
+ NUMBER OF CORE ORBITALS:          10   (   3Ag  +   1B3u +   1B2u +   0B1g +   3B1u +   1B2g +   1B3g +   0Au  )
+ NUMBER OF VALENCE ORBITALS:        8   (   2Ag  +   1B3u +   1B2u +   0B1g +   2B1u +   1B2g +   1B3g +   0Au  )
+
+
+ NUCLEAR REPULSION ENERGY   51.95558052
+
+ EXTRA SYMMETRY OF AOS IN SYMMETRY 1:   1 1 1 1 1 1 1 1 1 1   1 1 1 1 1 1 2 1 2 1   2 1 2 1 2 1 2 1 2 1   2 1 2 1 3 2 1 3 2 1
+                                        3 2 2 3 1 2 3 1
+ EXTRA SYMMETRY OF AOS IN SYMMETRY 2:   1 1 1 1 1 1 1 1 1 1   1 1 1 2 1 2 1 2 1 2   1 2 1 2 1 2 1 2 3 1   2 3
+ EXTRA SYMMETRY OF AOS IN SYMMETRY 3:   1 1 1 1 1 1 1 1 1 1   1 1 1 2 1 2 1 2 1 2   1 2 1 2 1 2 1 2 3 1   2 3
+ EXTRA SYMMETRY OF AOS IN SYMMETRY 4:   1 1 1 1 1 1 1 1 1 1   2 1 2 1 2 2 1 2 1
+ EXTRA SYMMETRY OF AOS IN SYMMETRY 5:   1 1 1 1 1 1 1 1 1 1   1 1 1 1 1 1 2 1 2 1   2 1 2 1 2 1 2 1 2 1   2 1 2 1 3 2 1 3 2 1
+                                        3 2 2 3 1 2 3 1
+ EXTRA SYMMETRY OF AOS IN SYMMETRY 6:   1 1 1 1 1 1 1 1 1 1   1 1 1 2 1 2 1 2 1 2   1 2 1 2 1 2 1 2 3 1   2 3
+ EXTRA SYMMETRY OF AOS IN SYMMETRY 7:   1 1 1 1 1 1 1 1 1 1   1 1 1 2 1 2 1 2 1 2   1 2 1 2 1 2 1 2 3 1   2 3
+ EXTRA SYMMETRY OF AOS IN SYMMETRY 8:   1 1 1 1 1 1 1 1 1 1   2 1 2 1 2 2 1 2 1
+
+ Eigenvalues of metric
+
+         1 0.525E-05 0.303E-04 0.377E-02 0.136E-01 0.229E-01 0.334E-01 0.424E-01 0.511E-01
+         2 0.525E-05 0.220E-01 0.385E-01 0.414E-01 0.576E-01 0.113E+00 0.155E+00 0.160E+00
+         3 0.525E-05 0.220E-01 0.385E-01 0.414E-01 0.576E-01 0.113E+00 0.155E+00 0.160E+00
+         4 0.424E-01 0.591E-01 0.152E+00 0.161E+00 0.204E+00 0.204E+00 0.224E+00 0.283E+00
+         5 0.525E-05 0.287E-04 0.116E-02 0.309E-02 0.147E-01 0.245E-01 0.360E-01 0.407E-01
+         6 0.525E-05 0.161E-01 0.255E-01 0.402E-01 0.509E-01 0.829E-01 0.100E+00 0.148E+00
+         7 0.525E-05 0.161E-01 0.255E-01 0.402E-01 0.509E-01 0.829E-01 0.100E+00 0.148E+00
+         8 0.360E-01 0.567E-01 0.133E+00 0.151E+00 0.202E+00 0.204E+00 0.206E+00 0.244E+00
+
+
+ Contracted 2-electron integrals neglected if value below      1.0D-12
+ No memory left in getmem. Have:              5601651   Need:               6161889
+
+ GETMEM ERROR IN GETMEM  k2  Allo
+
+  Memory allocation map
+  ---------------------
+
+  FldNam   VarTyp            ID   Length     iPos
+  - - - - - - - - - - - - - - - - - - - - - - - -
+  IGAT  IGAS  INFOF     REAL 17574067047344  1999974*********
+  SPHE  HERR  HERW  TMAX  DDX   IMAP?©Ø\  INTE 17574069048660     4851*********
+  IX0 ?©Ø\  REAL 17574069053512      162*********
+  IMAP?©Ø\  INTE 17574069053675     6602*********
+  IX0 ?©Ø\  REAL 17574069060278      196*********
+  IMAP?©Ø\  INTE 17574069060475     5635*********
+  IX0 ?©Ø\  REAL 17574069066111      173*********
+  IMAP?©Ø\  INTE 17574069066285     6337*********
+  IX0 ?©Ø\  REAL 17574069072623      211*********
+  IMAP?©Ø\  INTE 17574069072835     5027*********
+  IX0 ?©Ø\  REAL 17574069077863      180*********
+  IMAP?©Ø\  INTE 17574069078044     5501*********
+  IX0 ?©Ø\  REAL 17574069083546      210*********
+  IMAP?©Ø\  INTE 17574069083757     4041*********
+  IX0 ?©Ø\  REAL 17574069087799      176*********
+  IMAP?©Ø\  INTE 17574069087976     4627*********
+  IX0 ?©Ø\  REAL 17574069092604      197*********
+  IMAP?©Ø\  INTE 17574069092802     3317*********
+  IX0 ?©Ø\  REAL 17574069096120      162*********
+  CFFR?©Ø\  REAL 17574069096283     2268*********
+  CFFR?©Ø\  REAL 17574069098552     5488*********
+  CFFR?©Ø\  REAL 17574069104041     7266*********
+  CFFR?©Ø\  REAL 17574069111308    11816*********
+  CFFR?©Ø\  REAL 17574069123125    12600*********
+  CFFR?©Ø\  REAL 17574069135726    17640*********
+  CFFR?©Ø\  REAL 17574069153367    17248*********
+  CFFR?©Ø\  REAL 17574069170616    22064*********
+  CFFR?©Ø\  REAL 17574069192681    20412*********
+  HERRñl'|  REAL 17574069213094       66*********
+  HERWñl'|  REAL 17574069213161       66*********
+  CENTPƒÉ  REAL 17574069213228        6*********
+  MASSPƒÉ  REAL 17574069213235        2*********
+  CHARPƒÉ  REAL 17574069213238        2*********
+  MPMC      REAL 17574069213241        6*********
+  ISD       INTE 17574069213248      190*********
+  ISOS∞ï´  INTE 17574069213439      524*********
+  AUXB∞ï´  REAL 17574069213964      512*********
+  MEMR∞ï´  REAL 17574069214477     8820*********
+  MEMI∞ï´  INTE 17574069223298      882*********
+  HRRM  K2  	
+ STACK TRACE:
+
+ SEWARD                            0.00      0.00
+
+ GLOBAL ERROR fehler on processor   0                                         

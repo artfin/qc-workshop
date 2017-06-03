@@ -1,0 +1,7 @@
+3 ! rmin(ang)
+7.5 ! rmax(ang)
+0 ! emin(cm^-1)
+60 ! emax(cm^-1)
+19.974 ! mass (a.m.u)
+0 ! Omega
+30 ! Jmax-Omega

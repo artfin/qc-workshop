@@ -1,0 +1,151 @@
+
+ Primary working directories    : /mnt/SSD/student17
+ Secondary working directories  : /mnt/SSD/student17
+ Wavefunction directory         : /home/student17/wfu/
+ Main file repository           : /mnt/SSD/student17/
+
+ ARCHNAME  : Linux/x86_64
+ FC        : /usr/bin/gfortran
+ FCVERSION : 4.7.2
+ BLASLIB   : -L/opt/intel/mkl/lib/intel64 -lmkl_intel_ilp64 -lmkl_sequential -lmkl_core
+ id        : plat
+
+ Nodes     nprocs
+ debserv      1
+ ga_uses_ma=false, calling ma_init with nominal heap.
+ GA-space will be limited to   8.0 MW (determined by -G option)
+
+ Using customized tuning parameters: mindgm=12; mindgv=24; mindgc=8; mindgr=1; noblas=0; mincuda=1000; minvec=7
+ default implementation of scratch files=df  
+
+ ***,Ar-Ar
+ 
+                                                                                 ! basis = aug-cc-pvqz ! basis set
+ basis = aug-cc-pvqz
+ 
+ geometry = {ar1; ar2, ar1, r}
+ r_min = 3.30, angstrem
+ r_max = 7.50, angstrem
+ n = 43
+ 
+ do i=1, n
+ r = r_min + (r_max - r_min)/(n-1) * (i-1)
+ dist(i) = r
+ 
+                                                                                 ! hartree fock
+ hf
+ ccsd(t)
+                                                                                 ! ci
+ e(i) = energy
+ 
+ dummy, ar1
+ ccsd(t)
+ e_ar1 = energy
+ 
+ dummy, ar2
+ ccsd(t)
+ e_ar2 = energy
+ 
+ enddo
+ 
+ table dist, e, dip_x, dip_y, dip_z
+ save ar2.tab, new
+
+ Variables initialized (661), CPU time= 0.00 sec
+ Commands  initialized (460), CPU time= 0.00 sec, 486 directives.
+ Default parameters read. Elapsed time= 0.02 sec
+
+ Checking input...
+ Passed
+1
+
+
+                                         ***  PROGRAM SYSTEM MOLPRO  ***
+                         Copyright, University College Cardiff Consultants Limited, 2008
+
+                                    Version 2010.1 linked 30 Ноя 2013 12:52
+
+
+ **********************************************************************************************************************************
+ LABEL *   Ar-Ar                                                                         
+ Linux-3.2.0-4-amd64/debserv(x86_64) 64 bit mpp version                                  DATE: 03-Jun-17          TIME: 17:26:35  
+ **********************************************************************************************************************************
+
+ SHA1:             fd122acbd35ef3619fab5330ac0556b6c1fa4be2
+ **********************************************************************************************************************************
+
+ Variable memory set to    8000000 words,  buffer space   230000 words
+
+ SETTING BASIS          =    AUG-CC-PVQZ
+ SETTING R_MIN          =         3.30000000  ANGSTREM                        
+ SETTING R_MAX          =         7.50000000  ANGSTREM                        
+ SETTING N              =        43.00000000                                  
+
+ DO I                   =         1.00000000   
+ SETTING R              =         3.30000000  ANGSTREM                        
+ SETTING DIST(1)        =         3.30000000  ANGSTREM                        
+
+
+ Recomputing integrals since basis changed
+
+
+ Using spherical harmonics
+
+ Library entry AR     S aug-cc-pVQZ          selected for orbital group  1
+ Library entry AR     P aug-cc-pVQZ          selected for orbital group  1
+ Library entry AR     D aug-cc-pVQZ          selected for orbital group  1
+ Library entry AR     F aug-cc-pVQZ          selected for orbital group  1
+ Library entry AR     G aug-cc-pVQZ          selected for orbital group  1
+
+1PROGRAM * SEWARD (Integral evaluation for generally contracted gaussian basis sets)     Author: Roland Lindh, 1990
+
+ Geometry written to block  1 of record 700
+
+ Orientation using atomic masses  
+ Molecule type: Linear
+ Symmetry elements: X,Y,Z
+ Rotational constants:       2.3234015      2.3234015      0.0000000 GHz  (calculated with average atomic masses)
+
+ Point group  D2h 
+
+
+
+ ATOMIC COORDINATES
+
+ NR  ATOM    CHARGE       X              Y              Z
+
+   1  AR1    18.00    0.000000000    0.000000000   -3.118048117
+   2  AR2    18.00    0.000000000    0.000000000    3.118048117
+
+ NUCLEAR CHARGE:                   36
+ NUMBER OF PRIMITIVE AOS:         274
+ NUMBER OF SYMMETRY AOS:          224
+ NUMBER OF CONTRACTIONS:          168   (  33Ag  +  20B3u +  20B2u +  11B1g +  33B1u +  20B2g +  20B3g +  11Au  )
+ NUMBER OF CORE ORBITALS:          10   (   3Ag  +   1B3u +   1B2u +   0B1g +   3B1u +   1B2g +   1B3g +   0Au  )
+ NUMBER OF VALENCE ORBITALS:        8   (   2Ag  +   1B3u +   1B2u +   0B1g +   2B1u +   1B2g +   1B3g +   0Au  )
+
+
+ NUCLEAR REPULSION ENERGY   51.95558052
+
+ EXTRA SYMMETRY OF AOS IN SYMMETRY 1:   1 1 1 1 1 1 1 1 1 1   1 1 1 1 2 1 2 1 2 1   2 1 2 1 2 1 2 1 3 2   1 3 2
+ EXTRA SYMMETRY OF AOS IN SYMMETRY 2:   1 1 1 1 1 1 1 1 1 1   1 2 1 2 1 2 1 2 1 2
+ EXTRA SYMMETRY OF AOS IN SYMMETRY 3:   1 1 1 1 1 1 1 1 1 1   1 2 1 2 1 2 1 2 1 2
+ EXTRA SYMMETRY OF AOS IN SYMMETRY 4:   1 1 1 1 1 1 1 1 2 1   2
+ EXTRA SYMMETRY OF AOS IN SYMMETRY 5:   1 1 1 1 1 1 1 1 1 1   1 1 1 1 2 1 2 1 2 1   2 1 2 1 2 1 2 1 3 2   1 3 2
+ EXTRA SYMMETRY OF AOS IN SYMMETRY 6:   1 1 1 1 1 1 1 1 1 1   1 2 1 2 1 2 1 2 1 2
+ EXTRA SYMMETRY OF AOS IN SYMMETRY 7:   1 1 1 1 1 1 1 1 1 1   1 2 1 2 1 2 1 2 1 2
+ EXTRA SYMMETRY OF AOS IN SYMMETRY 8:   1 1 1 1 1 1 1 1 2 1   2
+
+ Eigenvalues of metric
+
+         1 0.201E-03 0.666E-03 0.107E-01 0.483E-01 0.566E-01 0.842E-01 0.944E-01 0.103E+00
+         2 0.684E-03 0.548E-01 0.816E-01 0.987E-01 0.107E+00 0.289E+00 0.340E+00 0.355E+00
+         3 0.684E-03 0.548E-01 0.816E-01 0.987E-01 0.107E+00 0.289E+00 0.340E+00 0.355E+00
+         4 0.842E-01 0.103E+00 0.339E+00 0.344E+00 0.400E+00 0.711E+00 0.119E+01 0.166E+01
+         5 0.194E-03 0.636E-03 0.430E-02 0.952E-02 0.366E-01 0.725E-01 0.787E-01 0.840E-01
+         6 0.678E-03 0.455E-01 0.566E-01 0.825E-01 0.975E-01 0.193E+00 0.273E+00 0.327E+00
+         7 0.678E-03 0.455E-01 0.566E-01 0.825E-01 0.975E-01 0.193E+00 0.273E+00 0.327E+00
+         8 0.787E-01 0.926E-01 0.330E+00 0.339E+00 0.360E+00 0.686E+00 0.108E+01 0.165E+01
+
+
+ Contracted 2-electron integrals neglected if value below      1.0D-11

@@ -1,0 +1,20 @@
+r=5.6
+geometry={nosym; he1; he2,he1,r}
+basis=avqz
+
+!wf records
+ca=2101.2
+cb=2102.2
+
+!monomer A
+dummy,he2
+{hf; save,$ca}
+sapt;monomerA
+
+!monomer B
+dummy,he1
+{hf; start,atdens; save,$cb}
+sapt;monomerB
+
+!interaction contributions
+sapt;intermol,ca=$ca,cb=$cb

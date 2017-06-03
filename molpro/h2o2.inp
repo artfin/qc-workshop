@@ -1,0 +1,41 @@
+basis = vdz
+
+geometry = {H1,
+            O1, H1, rOH,
+            O2, O1, rOO, H1, alpha,
+            H2, O2, rOH, O1, alpha, H1, beta}
+
+rOH = 0.7 Ang
+rOO = 2 Ang
+alpha = 90 Degree
+beta = 90 Degree
+
+hf ! do HF-calculation
+mp2 ! do MP2-calculation after HF
+optg ! optimize geometry
+
+text, geometry
+show, rOH, rOO, alpha, beta
+
+e_mp2 = energy ! saving energy
+
+do i = 1, 36 ! going over beta in 10-degree steps
+beta = -180 + (i - 1) * 10
+hf
+mp2
+beta_int_rot(i) = beta
+e_int_rot(i) = (energy - e_mp2) * 2625.5 ! from hartree to kj/mol
+enddo 
+
+do i = 1, 36 ! going over beta in 10-degree steps
+beta = -180 + (i - 1) * 10
+hf
+mp2
+optg; inactive, beta ! additionally optimize geometry for 
+e_int_rot_optg(i) = (energy - e_mp2) * 2625.5 ! from hartree to kj/mol
+enddo 
+
+table, beta_int_rot,e_int_rot, e_int_rot_optg
+save h2o2.tab, new
+
+

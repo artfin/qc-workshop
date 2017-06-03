@@ -1,0 +1,102 @@
+
+ Primary working directories    : /mnt/SSD/student17
+ Secondary working directories  : /mnt/SSD/student17
+ Wavefunction directory         : /home/student17/wfu/
+ Main file repository           : /mnt/SSD/student17/
+
+ ARCHNAME  : Linux/x86_64
+ FC        : /usr/bin/gfortran
+ FCVERSION : 4.7.2
+ BLASLIB   : -L/opt/intel/mkl/lib/intel64 -lmkl_intel_ilp64 -lmkl_sequential -lmkl_core
+ id        : plat
+
+ Nodes     nprocs
+ debserv      1
+ ga_uses_ma=false, calling ma_init with nominal heap.
+ GA-space will be limited to   8.0 MW (determined by -G option)
+
+ Using customized tuning parameters: mindgm=12; mindgv=24; mindgc=8; mindgr=1; noblas=0; mincuda=1000; minvec=7
+ default implementation of scratch files=df  
+
+ geometry={nosym; he1; he2,he1,r}
+ basis=avtz
+ 
+                                                                                 !wf records
+ ca=2101.2
+ cb=2102.2
+ 
+                                                                                 !distances
+ dist=[4.5,5.0,5.5,5.6,6.0,6.5,7.0]
+ 
+ do i=1,#dist
+    r=dist(i)
+ 
+                                                                                 !monomer A
+    dummy,he2
+    {hf; save,$ca}
+    sapt;monomerA
+ 
+                                                                                 !monomer B
+    dummy,he1
+    {hf; start,atdens; save,$cb}
+    sapt;monomerB
+ 
+                                                                                 !interaction contributions
+    sapt;intermol,ca=$ca,cb=$cb
+ 
+    elst(i)=E1pol;  exch(i)=E1ex
+    ind(i)=E2ind;   exind(i)=E2exind
+    disp(i)=E2disp; exdisp(i)=E2exdisp
+    etot(i)=E12tot
+ 
+    data,truncate,$ca
+ enddo
+ 
+ {table,dist,elst,exch,ind,exind,disp,exdisp,etot
+ ftyp,d,d,d,d,d,d,d,d,d
+ plot}
+
+ Variables initialized (661), CPU time= 0.00 sec
+ Commands  initialized (460), CPU time= 0.00 sec, 486 directives.
+ Default parameters read. Elapsed time= 0.01 sec
+
+ Checking input...
+ Passed
+1
+
+
+                                         ***  PROGRAM SYSTEM MOLPRO  ***
+                         Copyright, University College Cardiff Consultants Limited, 2008
+
+                                    Version 2010.1 linked 30 Ноя 2013 12:52
+
+
+ **********************************************************************************************************************************
+ LABEL *                                                                                 
+ Linux-3.2.0-4-amd64/debserv(x86_64) 64 bit mpp version                                  DATE: 03-Jun-17          TIME: 15:02:30  
+ **********************************************************************************************************************************
+
+ SHA1:             fd122acbd35ef3619fab5330ac0556b6c1fa4be2
+ **********************************************************************************************************************************
+ Faulty geometry input, specified line:
+HE2                             
+HE1                             
+R                               
+ Your input contained                     3  fields, but there should have been                     5
+
+ Z matrix     Current Z-matrix
+ ========
+
+ Records:   700.0   700.0
+ Maximum, total, and current numbers of geometry points 100   0   0
+ Orientation using atomic masses  
+
+   #     Tag     N1 Distance  N2 Angle     N3 Angle        J
+
+   1  1   NOSYM
+   2  2   HE1     0            0            0         
+   3  3   HE2     0  ? Error
+ ? Too few geometry parameters given on zmatrix line
+ ? The problem occurs in zmatrix
+
+ GLOBAL ERROR fehler on processor   0                                         

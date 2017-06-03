@@ -1,0 +1,22 @@
+***,h2o test
+memory,1,m                            !allocate 1 MW dynamic memory
+geometry={o;h1,o,r;h2,o,r,h1,theta}   !Z-matrix geometry input
+basis=vtz                             !cc-pVTZ basis set
+r=1 ang                               !bond length
+theta=104                             !bond angle
+hf                                    !do scf calculation
+
+text,examples for single-reference correlation treatments
+
+ci                                    !CISD using MRCI code
+cepa(1)                               !cepa-1 using MRCI code
+mp2                                   !Second-order Moeller-Plesset
+mp3                                   !Second and third-order MP
+mp4                                   !Second, third, and fourth-order MP4(SDTQ)
+mp4;notripl                           !MP4(SDQ)
+cisd                                  !CISD using special closed-shell code
+ccsd(t)                               !coupled-cluster CCSD(T)
+qci(t)                                !quadratic configuration interaction QCISD(T)
+bccd(t)                               !Brueckner CCD(T) calculation
+--
+

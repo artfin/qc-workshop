@@ -1,0 +1,66 @@
+gthresh,energy=1.d-8,orbital=1.d-8,grid=1.d-8
+symmetry,nosym
+orient,noorient
+geometry={
+Ne,,0.0,0.0,0.0
+Ar,,0.0,0.0,6.5}
+basis=avtz
+
+!=========delta(HF) contribution for higher order interaction terms====
+!sapt files
+ca=2101.2
+cb=2102.2
+
+!dimer
+hf
+edm=energy
+
+!monomer A
+dummy,ar
+{hf; save,$ca}
+ema=energy
+{sapt;monomerA}
+
+!monomer B
+dummy,ne
+{hf; start,atdens; save,$cb}
+emb=energy
+{sapt;monomerB}
+
+!interaction contributions
+{sapt,SAPT_LEVEL=2;intermol,ca=$ca,cb=$cb,icpks=1}
+
+!calculate high-order terms by subtracting 1st+2nd order energies
+eint_hf=(edm-ema-emb)*1000 mH
+delta_hf=eint_hf-e1pol-e1ex-e2ind-e2exind
+
+
+!=========DFT-SAPT at second order intermol. perturbation theory====
+!sapt files
+ca=2103.2
+cb=2104.2
+
+!shifts for asymptotic correction to xc potential
+eps_homo_pbe0_ar=-0.440936      !HOMO(Ar)/PBE0 functional
+eps_homo_pbe0_ne=-0.589207      !HOMO(Ne)/PBE0
+ip_ar=0.5792                    !exp. ionisation potential
+ip_ne=0.7925                    !exp. ionisation potential
+shift_ar=ip_ar+eps_homo_pbe0_ar !shift for bulk xc potential (Ar)
+shift_ne=ip_ne+eps_homo_pbe0_ne !shift for bulk xc potential (Ne)
+
+!monomer A
+dummy,ar
+{ks,pbe0; asymp,shift_ne; save,$ca}
+{sapt;monomerA}
+
+!monomer B
+dummy,ne
+{ks,pbe0; start,atdens; asymp,shift_ar; save,$cb}
+{sapt;monomerB}
+
+!interaction contributions
+{sapt;intermol,ca=$ca,cb=$cb,icpks=0}
+
+!add high-order approximation to obtain the total interaction energy
+eint_dftsapt=e12tot+delta_hf
+
