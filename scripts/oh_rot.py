@@ -41,7 +41,7 @@ def read_hitran_data():
                     
                 freq_hitran.append(float(data[1]))
                 lineint_hitran.append(float(data[5]))
-    
+                print(line)
     return freq_hitran, j_lower, j_higher, lineint_hitran
 
 def norm_arr(s):
