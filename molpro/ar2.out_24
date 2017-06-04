@@ -1,0 +1,109 @@
+
+ Primary working directories    : /mnt/SSD/student17
+ Secondary working directories  : /mnt/SSD/student17
+ Wavefunction directory         : /home/student17/wfu/
+ Main file repository           : /mnt/SSD/student17/
+
+ ARCHNAME  : Linux/x86_64
+ FC        : /usr/bin/gfortran
+ FCVERSION : 4.7.2
+ BLASLIB   : -L/opt/intel/mkl/lib/intel64 -lmkl_intel_ilp64 -lmkl_sequential -lmkl_core
+ id        : plat
+
+ Nodes     nprocs
+ debserv      1
+ ga_uses_ma=false, calling ma_init with nominal heap.
+ GA-space will be limited to   8.0 MW (determined by -G option)
+
+ Using customized tuning parameters: mindgm=12; mindgv=24; mindgc=8; mindgr=1; noblas=0; mincuda=1000; minvec=7
+ default implementation of scratch files=df  
+
+ ***,Ar-Ar
+ 
+                                                                                 ! basis = aug-cc-pvqz ! basis set
+ basis = aug-cc-pvdz
+ 
+ geometry = {nosymm;
+ Ar1;
+ Ar2, Ar1, r}
+ 
+ r_min = 3.30, angstrem
+ r_max = 7.50, angstrem
+ n = 43
+ 
+ do i=1, n
+ r = r_min + (r_max - r_min)/(n-1) * (i-1)
+ dist(i) = r
+ 
+                                                                                 ! hartree fock
+ hf
+ ccsd(t)
+ e_complex = energy
+ 
+ text, energy of Ar1
+ dummy Ar1
+ hf
+ ccsd(t)
+ e_ar1 = energy
+ 
+ text, energy of Ar2
+ dummy Ar2
+ hf
+ ccsd(t)
+ e_ar2 = energy
+ 
+ e(i) = e_complex - e_ar1 - e_ar2
+ 
+ enddo
+ 
+ table dist, e
+ save ar2.tab, new
+
+ Variables initialized (661), CPU time= 0.00 sec
+ Commands  initialized (460), CPU time= 0.01 sec, 486 directives.
+ Default parameters read. Elapsed time= 0.02 sec
+
+ Checking input...
+ Passed
+1
+
+
+                                         ***  PROGRAM SYSTEM MOLPRO  ***
+                         Copyright, University College Cardiff Consultants Limited, 2008
+
+                                    Version 2010.1 linked 30 Ноя 2013 12:52
+
+
+ **********************************************************************************************************************************
+ LABEL *   Ar-Ar                                                                         
+ Linux-3.2.0-4-amd64/debserv(x86_64) 64 bit mpp version                                  DATE: 04-Jun-17          TIME: 14:22:21  
+ **********************************************************************************************************************************
+
+ SHA1:             fd122acbd35ef3619fab5330ac0556b6c1fa4be2
+ **********************************************************************************************************************************
+
+ Variable memory set to    8000000 words,  buffer space   230000 words
+
+ SETTING BASIS          =    AUG-CC-PVDZ
+ Faulty geometry input, specified line:
+AR2                             
+AR1                             
+R                               
+ Your input contained                     3  fields, but there should have been                     5
+
+ Z matrix     Current Z-matrix
+ ========
+
+ Records:   700.0   700.0
+ Maximum, total, and current numbers of geometry points 100   0   0
+ Orientation using atomic masses  
+
+   #     Tag     N1 Distance  N2 Angle     N3 Angle        J
+
+   1  1   NOSYM
+   2  2   AR1     0            0            0         
+   3  3   AR2     0  ? Error
+ ? Too few geometry parameters given on zmatrix line
+ ? The problem occurs in zmatrix
+
+ GLOBAL ERROR fehler on processor   0                                         
