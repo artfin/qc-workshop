@@ -1,0 +1,134 @@
+<?xml version="1.0"?>
+<molpro xmlns="http://www.molpro.net/schema/molpro-output"
+  xmlns:xsd="http://www.w3.org/1999/XMLSchema"
+  xmlns:cml="http://www.xml-cml.org/schema"
+  xmlns:stm="http://www.xml-cml.org/schema"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+ <!--
+
+ Primary working directories    : /mnt/SSD/student17
+ Secondary working directories  : /mnt/SSD/student17
+ Wavefunction directory         : /home/student17/wfu/
+ Main file repository           : /mnt/SSD/student17/
+
+ ARCHNAME  : Linux/x86_64
+ FC        : /usr/bin/gfortran
+ FCVERSION : 4.7.2
+ BLASLIB   : -L/opt/intel/mkl/lib/intel64 -lmkl_intel_ilp64 -lmkl_sequential -lmkl_core
+ id        : plat
+
+ Nodes     nprocs
+ debserv      1
+ ga_uses_ma=false, calling ma_init with nominal heap.
+ GA-space will be limited to   8.0 MW (determined by -G option)
+
+ Using customized tuning parameters: mindgm=12; mindgv=24; mindgc=8; mindgr=1; noblas=0; mincuda=1000; minvec=7
+ default implementation of scratch files=df  
+
+ --><job>
+  <!--
+ ***,Ar-Ar
+ 
+                                                                                 ! basis = aug-cc-pvqz ! basis set
+ basis = aug-cc-pvqz
+ 
+ geometry = {
+ Ar1, 0.00, 0.00, 0.00;
+ Ar2, 0.00, 0.00, r}
+ 
+ r_min = 3.30, angstrem
+ r_max = 12.50, angstrem
+ n = 93
+ 
+ do i=1, n
+ r = r_min + (r_max - r_min)/(n-1) * (i-1)
+ dist(i) = r
+ 
+                                                                                 ! hartree fock
+ hf
+ ccsd(t)
+ e_complex = energy
+ 
+ e(i) = e_complex
+ 
+ enddo
+ 
+ table dist, e
+ save ar2.tab, new
+
+ Variables initialized (661), CPU time= 0.00 sec
+ Commands  initialized (460), CPU time= 0.00 sec, 486 directives.
+ Default parameters read. Elapsed time= 0.02 sec
+
+ Checking input...
+ Passed
+1
+
+
+                                         ***  PROGRAM SYSTEM MOLPRO  ***
+                         Copyright, University College Cardiff Consultants Limited, 2008
+
+                                    Version 2010.1 linked 30 Ноя 2013 12:52
+
+
+ **********************************************************************************************************************************
+ LABEL *   Ar-Ar                                                                         
+ Linux-3.2.0-4-amd64/debserv(x86_64) 64 bit mpp version                                  DATE: 04-Jun-17          TIME: 16:33:04  
+ **********************************************************************************************************************************
+
+ SHA1:             fd122acbd35ef3619fab5330ac0556b6c1fa4be2
+ **********************************************************************************************************************************
+  -->
+  <!--
+
+ Variable memory set to    8000000 words,  buffer space   230000 words
+
+ SETTING BASIS          =    AUG-CC-PVQZ
+
+Geometry recognized as XYZ
+
+ SETTING R_MIN          =         3.30000000  ANGSTREM                        
+ SETTING R_MAX          =        12.50000000  ANGSTREM                        
+ SETTING N              =        93.00000000                                  
+
+ DO I                   =         1.00000000   
+ SETTING R              =         3.30000000  ANGSTREM                        
+ SETTING DIST(1)        =         3.30000000  ANGSTREM                        
+  --><jobstep command="HF-SCF" commandset="SCFPRO">
+   <!--
+
+
+ Recomputing integrals since basis changed
+
+
+ Using spherical harmonics
+
+ Possible error in geometry specification
+ The centres                     2 AR2 and                     1 AR1 have ended up at the same place
+
+ Z matrix     current Z matrix
+ ========
+
+ Records:   700.0   700.0
+ Maximum, total, and current numbers of geometry points 100   0   0
+ Unique atoms/degeneracy:
+
+   #     Tag     N1 Distance  N2 Angle     N3 Angle        J
+   Grp   Chg     Distance     Angle        Angle                  x            y            z
+
+   1  1   AR1     0 GX1        0 GY1        0 GZ1     
+      1 18.0    0.0000000    0.0000000    0.0000000              0.0000000    0.0000000    0.0000000
+   2  2   AR2     0 GX2        0 GY2        0 GZ2     
+      1 18.0    0.0000000    0.0000000    0.0000000              0.0000000    0.0000000    0.0000000
+
+ Variables on which Z-matrix depends:
+ Name:                GX1             GY1             GZ1             GX2             GY2             GZ2
+ Value:         0.0000000 A     0.0000000 A     0.0000000 A     0.0000000 A     0.0000000 A     0.0000000 A
+ ? Error
+ ? Illegal coincident centres
+ ? The problem occurs in zmatrix.f:zmat_weed
+   --><error type="Error" location="zmatrix.f:zmat_weed"
+     message="Illegal coincident centres"/><!--
+  --></jobstep><!--
+
+ GLOBAL ERROR fehler on processor   0                                         
