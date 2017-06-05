@@ -1,0 +1,76 @@
+\documentclass[12pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[russian]{babel}
+
+% page margin
+\usepackage[top=2cm,bottom=2cm, left=2cm, right=2cm]{geometry}
+
+% AMS packages
+\usepackage{amssymb}
+\usepackage{amsmath}
+
+% fancy layout
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+
+% table/tabular packages
+\usepackage{tabularx, rotating, ragged2e, booktabs, caption}
+\usepackage{graphicx}
+\usepackage[verbose]{placeins}
+\usepackage{blindtext}
+\usepackage{multicol}
+
+\newcolumntype{C}[1]{>{\Centering}m{#1}}
+\renewcommand\tabularxcolumn[1]{C{#1}}
+\setlength{\tabcolsep}{12pt}
+
+\usepackage{makecell}
+\newcolumntype{x}[1]{>{\centering\arraybackslash}p{#1}}
+\usepackage{tikz}
+\newcommand\diag[4]{%
+  \multicolumn{1}{p{#2}|}{\hskip-\tabcolsep
+  $\vcenter{\begin{tikzpicture}[baseline=0,anchor=south west,inner sep=#1]
+  \path[use as bounding box] (0,0) rectangle (#2+2\tabcolsep,\baselineskip);
+  \node[minimum width={#2+2\tabcolsep-\pgflinewidth},
+        minimum  height=\baselineskip+\extrarowheight-\pgflinewidth] (box) {};
+  \draw[line cap=round] (box.north west) -- (box.south east);
+  \node[anchor=south west] at (box.south west) {#3};
+  \node[anchor=north east] at (box.north east) {#4};
+ \end{tikzpicture}}$\hskip-\tabcolsep}}
+
+ \begin{document}
+
+\begin{minipage}{0.5\linewidth}
+\captionof{table}{Emp. potential}
+\setlength{\extrarowheight}{0.1cm}
+\begin{tabular}{cccc}
+\hline
+\diag{.2em}{.5cm}{J}{$\nu$} & 0 & 1 & 2 \\ \hline
+0 & 0.0 &  25.74 & 46.15 \\
+2 & 0.35 & 26.06 & 46.44 \\ 
+4 & 1.16 & 26.81 & 47.12 \\
+6 & 2.43 & 27.98 & 48.18 \\
+8 & 4.15 & 29.58 & 49.63 \\
+10 & 6.34 & 31.59  & 51.46 \\
+12 & 8.99 & 34.03 & 53.67
+\end{tabular}
+\end{minipage}
+\begin{minipage}{0.5\linewidth}
+	\captionof{table}{Calc. potential}
+\setlength{\extrarowheight}{0.1cm}
+\begin{tabular}{cccc}
+\hline
+\diag{.2em}{.5cm}{J}{$\nu$} & 0 & 1 & 2 \\ \hline
+0 & 0.0 &  24.50 & 44.09 \\
+2 & 0.34 & 24.81 & 44.37 \\ 
+4 & 1.13 & 25.54 & 45.04 \\
+6 & 2.37 & 26.69 & 46.10 \\
+8 & 4.06 & 28.24 & 47.51 \\
+10 & 6.19 & 30.22  & 49.33 \\
+12 & 8.77 & 32.60 & 51.51
+\end{tabular}
+\end{minipage}
+
+\end{document}
