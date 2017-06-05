@@ -1,0 +1,102 @@
+
+ Primary working directories    : /mnt/SSD/student17
+ Secondary working directories  : /mnt/SSD/student17
+ Wavefunction directory         : /home/student17/wfu/
+ Main file repository           : /mnt/SSD/student17/
+
+ ARCHNAME  : Linux/x86_64
+ FC        : /usr/bin/gfortran
+ FCVERSION : 4.7.2
+ BLASLIB   : -L/opt/intel/mkl/lib/intel64 -lmkl_intel_ilp64 -lmkl_sequential -lmkl_core
+ id        : plat
+
+ Nodes     nprocs
+ debserv      1
+ ga_uses_ma=false, calling ma_init with nominal heap.
+ GA-space will be limited to   8.0 MW (determined by -G option)
+
+ Using customized tuning parameters: mindgm=12; mindgv=24; mindgc=8; mindgr=1; noblas=0; mincuda=1000; minvec=7
+ default implementation of scratch files=df  
+
+ ***,Ar-Ar
+ memory, 100, m
+ 
+                                                                                 ! basis = aug-cc-pvqz ! basis set
+ basis = aug-cc-pvdz
+ 
+ symmetry, nosym
+ geometry = {
+   ar1
+   ar2 ar1 r
+ }
+ 
+ r_min = 3.30, angstrem
+ r_max = 3.40, angstrem
+ n = 2
+                                                                                 ! r_max = 12.50, angstrem
+                                                                                 ! n = 93
+ 
+ do i = 1, n
+ 
+     r = r_min + (r_max - r_min)/(n-1) * (i-1)
+     dist(i) = r
+ 
+     text, CALCULATION AT LARGE SEPARATION
+ 
+     r_save = r                                                                  ! save current distance
+     r = 1000                                                                    ! dimer calculation at large separation
+ 
+     text, AR1
+ 
+     dummy, ar2                                                                  ! Ar2 is now dummy
+     hf
+     ccsd(t)
+     ear1inf = energy                                                            ! saving ccsd energy of Ar1
+ 
+     text AR2
+ 
+     dummy, ar1                                                                  ! Ar1 is no dummy
+     hf
+     ccsd(t)
+     ear2inf = energy                                                            ! saving ccsd energy of Ar2
+     einf = ear1inf + ear2inf                                                    ! total energy of unrelaxed monomers
+ 
+     r = r_save                                                                  ! reset Ar-Ar distance to current value
+ 
+     text, CP calculation for Ar1 monomer
+ 
+     dummy, ar2                                                                  ! Ar2 is now dummy
+     hf
+     ccsd(t)
+     ear1 = energy                                                               ! saving energy of ar1-monomer
+ 
+     text, CP calculation for Ar2 monomer
+ 
+     dummy, ar1                                                                  ! Ar1 is now dummy
+     hf
+     ccsd(t)
+     ear2 = energy                                                               ! saving energy of ar2-monomer
+ _
+     text, DIMER CALCULATION
+     dummy                                                                       ! reset dummies
+     hf
+     ccsd(t)
+     e_dimer = energy                                                            ! saving uncorrected dimer energy
+ 
+     e_corrected(i) = e_dimer - ear1 - ear2 + ear1inf + ear2inf
+                                                                                 ! total BSSE corrected energy
+ 
+ enddo
+ 
+ table dist, e_corrected
+ save ar_bsse.tab, new
+
+ Variables initialized (661), CPU time= 0.00 sec
+ Commands  initialized (460), CPU time= 0.01 sec, 486 directives.
+ Default parameters read. Elapsed time= 0.01 sec
+
+ Checking input...
+
+ Unknown command or directive _
+
+ GLOBAL ERROR checkinp on processor   0                                       
