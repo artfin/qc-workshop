@@ -1,0 +1,71 @@
+*** Ar-Ar
+memory, 100, m
+
+! basis = aug-cc-pvqz ! basis set
+basis = aug-cc-pvdz
+
+symmetry, nosym
+geometry = {
+  ar1
+  ar2 ar1 r
+}
+
+r_min = 3.30, angstrem
+r_max = 12.50, angstrem
+n = 93
+
+do i = 1, n
+ 
+    r = r_min + (r_max - r_min)/(n-1) * (i-1)
+    dist(i) = r
+
+    text, CALCULATION AT LARGE SEPARATION
+    
+    r_save = r                 ! save current distance
+    r = 1000                   ! dimer calculation at large separation
+
+    text, AR1
+
+    dummy, ar2                 ! Ar2 is now dummy
+    hf
+    ccsd(t)
+    ear1inf = energy           ! saving ccsd energy of Ar1
+
+    text AR2
+
+    dummy, ar1                 ! Ar1 is no dummy
+    hf
+    ccsd(t)
+    ear2inf = energy           ! saving ccsd energy of Ar2
+    einf = ear1inf + ear2inf   ! total energy of unrelaxed monomers
+
+    r = r_save                 ! reset Ar-Ar distance to current value
+
+    text, CP calculation for Ar1 monomer
+    
+    dummy, ar2                 ! Ar2 is now dummy
+    hf
+    ccsd(t)
+    ear1 = energy              ! saving energy of ar1-monomer
+
+    text, CP calculation for Ar2 monomer
+
+    dummy, ar1                 ! Ar1 is now dummy
+    hf
+    ccsd(t)
+    ear2 = energy              ! saving energy of ar2-monomer
+
+    text, DIMER CALCULATION
+    dummy                      ! reset dummies
+    hf
+    ccsd(t)
+    e_dimer = energy           ! saving uncorrected dimer energy
+    
+    e_uncorrected(i) = e_dimer   
+    e_corrected(i) = e_dimer - ear1 - ear2 + ear1inf + ear2inf
+                               ! total BSSE corrected energy
+      
+enddo
+
+table dist, e_uncorrected, e_corrected
+save ar_bsse.tab, new
