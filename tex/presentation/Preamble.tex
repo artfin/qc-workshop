@@ -1,0 +1,38 @@
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[russian]{babel}
+
+\usepackage{amssymb, amsmath}
+
+% table/tabular packages
+\usepackage{tabularx, rotating, ragged2e, booktabs, caption}
+\usepackage{graphicx}
+\usepackage[verbose]{placeins}
+\usepackage{blindtext}
+\usepackage{multicol}
+
+\usetheme{CambridgeUS}
+\useinnertheme{rectangles}
+\useoutertheme{infolines}
+
+\newcommand\Fontvi{\fontsize{6}{7.2}\selectfont}
+
+\beamertemplatenavigationsymbolsempty
+
+\setbeamerfont{page number in head/foot}{size=\large}
+\setbeamertemplate{footline}[frame number]
+\setbeamertemplate{frametitle}[default][center]
+
+% change font
+\usefonttheme[onlymath]{serif}
+
+\makeatother
+\setbeamertemplate{headline}
+{}
+\makeatletter
+
+% adding roman numerals
+\makeatletter
+\newcommand*{\rom}[1]{\expandafter\@slowromancap\romannumeral #1@}
+\makeatother
+
