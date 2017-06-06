@@ -3,9 +3,6 @@ import numpy as np
 
 htocm = 219474.63 # hartree to cm-1
 
-with open('../../molpro/ar2/ar_bsse.tab', mode = 'r') as inputfile:
-    lines = inputfile.readlines()
-
 def is_number(s):
     try:
         float(s)
@@ -13,24 +10,36 @@ def is_number(s):
     except ValueError:
         return False
 
-dist = np.array([])
-e_uncorr = np.array([])
-e_corr = np.array([])
-bsse = np.array([])
+def read_file(filename, dim):
+    with open(filename, mode = 'r') as inputfile:
+        lines = inputfile.readlines()
 
-for line in lines:
-    if len(line) > 1:
-        data = line.split()
+    dist = np.array([])
+    e_uncorr = np.array([])
+    e_corr = np.array([])
+    bsse = np.array([])
 
-        if len(data) > 1:
-            if is_number(data[0]):
-                dist = np.append(dist, float(data[0]))
-                e_uncorr = np.append(e_uncorr, float(data[1]))
-                e_corr = np.append(e_corr, float(data[2]))
-                bsse = np.append(bsse, float(data[1]) - float(data[2]))
+    for line in lines:
+        if len(line) > 1:
+            data = line.split()
 
-e_uncorr = [e - e_uncorr[-1] for e in e_uncorr]
-e_corr = [e - e_corr[-1] for e in e_corr]
+            if len(data) > 1:
+                if is_number(data[0]):
+                    if dim == 0:
+                        dist = np.append(dist, float(data[0]))
+                        e_uncorr = np.append(e_uncorr, float(data[1]))
+                        e_corr = np.append(e_corr, float(data[2]))
+                        bsse = np.append(bsse, float(data[1]) - float(data[2]))
+                    if dim == 1:
+                        dist = np.append(dist, float(data[0]))
+                        e_uncorr = np.append(dist, float(data[1]))
+                        bsse = np.append(bsse, float(data[2]))
 
-for d, u, c, b in zip(dist, e_uncorr, e_corr, bsse):
-    print("distance: {0}; uncorrelated: {1}; correlated: {2}; bbse: {3}".format(d, u * htocm, c * htocm, b * htocm))
+    print(bsse)
+
+    for d, b in zip(dist, bsse):
+        print("distance: {0}; bbse: {1}".format(d, b * htocm))
+
+
+read_file('../../molpro/ar2/ar_bsse_pvdz.tab', dim = 0)
+read_file('../../molpro/ar2/ar_bsse_pvtz.tab', dim = 1)

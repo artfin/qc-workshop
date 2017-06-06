@@ -63,9 +63,45 @@ dist_emp, potential_emp = read_potential('../../data/ar2/pec.dat', dim = 0)
 dist_patkowski, potential_patkowski = read_potential('../../data/ar2/patkowski/aug-cc-pv5z.dat', dim = 0)
 dist_slavcek, potential_slavcek = read_potential('../../data/ar2/slavcek/aug-cc-pv5z.dat', dim = 0)
 
-v0 = read_energy('../../data/ar2/my_ar/energy.dat', level = 0)
-v1 = read_energy('../../data/ar2/my_ar/energy.dat', level = 1)
-v2 = read_energy('../../data/ar2/my_ar/energy.dat', level = 2)
+#diff_ccsd_pat = np.array([])
+#diff_ccsd_r1 = np.array([])
+
+#diff_ccsd_slav = np.array([])
+#diff_ccsd_r2 = np.array([])
+
+#for r in dist_ccsd:
+    #if r in dist_slavcek:
+    
+        #pc = potential_ccsd[dist_ccsd.index(r)]
+        #ps = potential_slavcek[dist_slavcek.index(r)]
+
+        #diff_ccsd_slav = np.append(diff_ccsd_slav, pc - ps)
+        #diff_ccsd_r2 = np.append(diff_ccsd_r2, r)
+
+    #if r in dist_patkowski:
+
+        #pc = potential_ccsd[dist_ccsd.index(r)]
+        #pp = potential_patkowski[dist_patkowski.index(r)] 
+        
+        #diff_ccsd_pat = np.append(diff_ccsd_pat, pc - pp)
+        #diff_ccsd_r1 = np.append(diff_ccsd_r1, r)
+
+#for r1, r2, e1, e2 in zip(dist_ccsd, dist_slavcek, potential_ccsd, potential_slavcek):
+    #print(r1, r2, e1, e2)
+
+#fig = plt.figure()
+#plt.rc('text', usetex = True)
+#ax = plt.subplot(1, 1, 1)
+
+#l1 = ax.scatter(diff_ccsd_r2, diff_ccsd_slav, marker = 'x', color = 'k')
+#l2 = ax.scatter(diff_ccsd_r1, diff_ccsd_pat, marker = 's', color = 'k')
+#ax.grid(alpha = 0.7, linestyle = ':')
+#fig.legend((l1, l2), (r'Difference betw. (1) \& (3)', r'Difference betw. (1) \& (2)'), 'lower center', ncol = 1, fancybox = True, shadow = True, prop = {'size': 'large'})
+#plt.show()
+
+#v0 = read_energy('../../data/ar2/my_ar/energy.dat', level = 0)
+#v1 = read_energy('../../data/ar2/my_ar/energy.dat', level = 1)
+#v2 = read_energy('../../data/ar2/my_ar/energy.dat', level = 2)
 
 fig = plt.figure()
 plt.rc('text', usetex = True)
@@ -87,7 +123,7 @@ ax.scatter(dist_ccsd, potential_ccsd, marker = 'x', color = 'k')
 ax.scatter(dist_slavcek, potential_slavcek, color = 'k', marker = '*')
 ax.scatter(dist_patkowski, potential_patkowski, color = 'k', marker = 'P')
 
-ax.set_xlim(3, 8)
+ax.set_xlim(3, 5)
 ax.set_ylim(-100, 10)
 
 #for index, e0, e1, e2 in zip(range(len(v0)), v0, v1, v2):
@@ -95,7 +131,7 @@ ax.set_ylim(-100, 10)
     #ax.axhline(y = e1 + min(potential_ccsd), color = 'k', xmin = 0.10, xmax = 0.29)
     #ax.axhline(y = e2 + min(potential_ccsd), color = 'k', xmin = 0.09, xmax = 0.36)
 
-fig.legend((l1, l3, l4), (r'CCSD(T); \textit{aug-cc-pVQZ}', r'CCSD(T); \textit{aug-cc-pV5Z+spdfg}; K.Patkowski, G. Murdachaew, C. Fou and K. Szalewicz, Mol. Phys. \textbf{103}, 15, 2005', r'CCSD(T) \textit{aug-cc-pV5Z + spdfg}; including core electrons; P. Slavicek, R. Kalus, P. Paska, I. Odvarkova, O. Hobza and A. Malijevsky, J. Chem. Phys., \textbf{119}, 4, 2003'), 'lower center', ncol = 1, fancybox = True, shadow = True, prop = {'size': 'small'})
+fig.legend((l1, l3, l4), (r'CCSD(T); \textit{aug-cc-pVQZ}', r'CCSD(T); \textit{aug-cc-pV5Z + spdfg}; K.Patkowski \textit{et al}, Mol. Phys. \textbf{103}, 15, 2005', r'CCSD(T) \textit{aug-cc-pV6Z + spdfg}; P. Slavicek \textit{et al} J. Chem. Phys., \textbf{119}, 4, 2003'), 'lower center', ncol = 1, fancybox = True, shadow = True, prop = {'size': 'small'})
 
 #fig.legend((l1, l2), (r'CCSD(T); \textit{aug-cc-pVQZ}', r'\textit{Empirical}; E.A. Colbourn and A. E. Douglas,  J. Chem. Phys., \textbf{65}, 5, 1976'), 'lower center', ncol = 3, fancybox = True, shadow = True, prop = {'size': 'large'})
 
@@ -108,6 +144,3 @@ plt.tight_layout(pad = 1.7, w_pad = 0.0, h_pad = -3.0)
 
 plt.show()
 
-#with open('ar2_ci.dat', mode = 'w') as out:
-    #for r, e in zip(dist, energy):
-       #out.write(str(r) + ' ' + str(e) + '\n')
